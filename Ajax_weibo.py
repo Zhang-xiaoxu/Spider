@@ -32,20 +32,20 @@ def parse_page(json):
     if json:
         print(type(json))
         items = json.get('data').get('cards')
-        # for index, item in enumerate(items):
-        #     if page == 1 and index == 1:
-        #         continue
-        #     else:
-        #         item = item.get('mblog')
-        #         weibo = {}
-        #         weibo['id'] = item.get('id')
-        #         weibo['text'] = pq(item.get('text')).text()
-        #         weibo['attitudes'] = item.get('attitudes_count')
-        #         weibo['comments'] = item.get('comments_count')
-        #         weibo['reposts'] = item.get('reposts_count')
-        #         yield weibo
-        for item in items:
-            print(item)
+        for index, item in enumerate(items):
+            if page == 1 and index == 1:
+                continue
+            else:
+                item = item.get('mblog')
+                weibo = {}
+                weibo['id'] = item.get('id')
+                weibo['text'] = pq(item.get('text')).text()
+                weibo['attitudes'] = item.get('attitudes_count')
+                weibo['comments'] = item.get('comments_count')
+                weibo['reposts'] = item.get('reposts_count')
+                yield weibo
+#         for item in items:
+#             print(item)
             #item = item.get('mblog')
             # weibo = {}
             # weibo['id'] = item.get('id')
