@@ -6,6 +6,9 @@ from multiprocessing.pool import Pool
 
 #?offset=0&format=json&keyword=%E8%A1%97%E6%8B%8D&autoload=true&count=20&cur_tab=3&from=gallery
 def gar_page(offset):
+    '''
+    请求参数
+    '''
     params = {
         'offset':offset,
         'format':'json',
@@ -28,13 +31,13 @@ def gar_page(offset):
 
 def get_images(json):
     if json.get('data'):
-        for item in json.get('data'):
-            title = item.get('title')
-            images = item.get('image_list')
+        for item in json.get('data'): #将json文件中key值为data的值取出来，并进行遍历
+            title = item.get('title') #将遍历的每个对象中的key为title的值赋给title
+            images = item.get('image_list') #image_list的值付给images
             if images:
-                for image in images:
+                for image in images: #images进行遍历
                     yield {
-                        'image':image.get('url'),
+                        'image':image.get('url'), #取出每张图片地址
                         'title':title
                     }
 
@@ -42,6 +45,9 @@ def get_images(json):
 
 
 def save_image(item):
+    '''
+    下载图片并保存
+    '''
     if not os.path.exists(item.get('title')):
         os.mkdir(item.get('title'))
     try:
